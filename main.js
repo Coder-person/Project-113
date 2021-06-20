@@ -1,38 +1,31 @@
-underNoseX = 0;
-underNoseY = 0;
-
 function preload(){
 
 }
 
 function setup(){
-    canvas = createCanvas(450,450);
+    canvas = createCanvas(600,400);
     canvas.center();
-    video = createCapture(VIDEO);
-    video.size(450,450);
-    video.hide();
-    poseNet_model = ml5.poseNet(video,modelLoaded);
-    poseNet_model.on("pose",Poses);
-}
-
-function modelLoaded(){
-    console.log('PoseNet model is ready.');
-}
-
-function Poses(results){
-    if(results.length > 0){
-        console.log(results);
-        underNoseX = results[0].pose.nose.x - 20;
-        underNoseY = results[0].pose.nose.y + 20;
-        console.log("Underneath nose X coord = "+underNoseX);
-        console.log("Underneath nose Y coord = "+underNoseY);
-    }
+    camera = createCapture(VIDEO);
+    camera.size(600,400);
+    camera.hide();
 }
 
 function draw(){
-    image(video,0,0,450,450);
+    image(camera,85,85,445,235);
+    fill("#4287f5");
+    stroke("#4287f5");
+    circle(50,50,70);
+    circle(550,50,70);
+    circle(50,350,70);
+    circle(550,350,70);
+    fill("#e100ff");
+    stroke("#e100ff");
+    rect(85,30,430,40);
+    rect(85,335,430,40);
+    rect(30,83,40,235);
+    rect(533,83,40,235);
 }
 
 function take_snapshot(){
-    save("Filter.png");
+    save('frame.png');
 }
